@@ -1,4 +1,5 @@
 const posts = require('../models/postsModel')
+const helper = require('../helpers/helper')
 
 const getPosts = (request, response) => {
     if(posts.length){
@@ -19,15 +20,18 @@ const getPostById = (request, response) => {
 }
 
 const createPost = (request, response) => {
-    const post = request.body
-    const newId = helper.getNewId(posts)
-    const date = helper.getDate()
+    const { titulo, conteudo, etiquetas } = request.body
+
     const newPost = {
-        id: newId,
-        dataCriacao: date,
-        ...posts
+        id: helper.getNewId(posts),
+        dataCriacao: helper.getDate(),
+        titulo: titulo,
+        conteudo: conteudo,
+        etiquetas: etiquetas
     }
 
+    posts.push(newPost)
+    
     response.status(200).json(newPost)
 
 }
