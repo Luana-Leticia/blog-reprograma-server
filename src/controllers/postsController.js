@@ -1,6 +1,12 @@
 const posts = require('../models/postsModel')
 
 const getPosts = (request, response) => {
+    if(posts.length){
+        response.status(200).json(posts)
+    } else {
+        response.status(500).json({ mensagem: 'Lista de posts vazia'})
+    }
+    
 
 }
 
