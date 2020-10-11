@@ -29,10 +29,23 @@ const createPost = (request, response) => {
     }
 
     response.status(200).json(newPost)
-    
+
 }
 
 const deletePost = (request, response) => {
+    const { id } = request.params
+    const post = posts.find((post, index) => {
+        if (post.id == id) {
+            posts.splice(index, 1)
+            return true
+        }
+    })
+
+    if(post){
+        response.status(200).json(posts)
+    } else {
+        response.status(404).json({ mensagem: 'Id não encontrado'})
+    }
 
 }
 

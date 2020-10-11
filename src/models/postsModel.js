@@ -14,3 +14,5 @@ const posts = [
         etiquetas: ['Artigo', 'Node', 'Javascript']
     },
 ]
+
+module.exports = posts
