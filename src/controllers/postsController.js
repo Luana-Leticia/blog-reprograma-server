@@ -22,18 +22,19 @@ const getPostById = (request, response) => {
 const createPost = (request, response) => {
     const { titulo, conteudo, etiquetas } = request.body
 
-    const newPost = {
-        id: helper.getNewId(posts),
-        dataCriacao: helper.getDate(),
-        titulo: titulo,
-        conteudo: conteudo,
-        etiquetas: etiquetas
+    if (titulo && conteudo && etiquetas) {
+        const newPost = {
+            id: helper.getNewId(posts),
+            dataCriacao: helper.getDate(),
+            titulo: titulo,
+            conteudo: conteudo,
+            etiquetas: etiquetas
+        }
+        posts.push(newPost)
+        response.status(200).json(newPost)
+    } else {
+        response.status(206).json({ mensagem: 'Algum campo não foi preenchido'})
     }
-
-    posts.push(newPost)
-    
-    response.status(200).json(newPost)
-
 }
 
 const deletePost = (request, response) => {
